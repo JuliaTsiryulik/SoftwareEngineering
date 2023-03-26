@@ -8,6 +8,7 @@ Config::Config()
         _password = std::getenv("DB_PASSWORD");
         _database = std::getenv("DB_DATABASE");
 
+
         /*_host = "localhost";
         _port = "3306";
         _login = "test";

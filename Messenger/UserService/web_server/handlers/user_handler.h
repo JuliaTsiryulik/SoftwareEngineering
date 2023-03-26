@@ -131,13 +131,13 @@ public:
             if (hasSubstr(request.getURI(), "/ping"))
             {
                 response.setStatus(Poco::Net::HTTPResponse::HTTP_OK);
-		response.setChunkedTransferEncoding(true);
-		response.setContentType("application/json");
-		Poco::JSON::Object::Ptr root = new Poco::JSON::Object();
-		root->set("ping", "ok");
-		std::ostream &ostr = response.send();
-		Poco::JSON::Stringifier::stringify(root, ostr);
-		return;
+                response.setChunkedTransferEncoding(true);
+                response.setContentType("application/json");
+                Poco::JSON::Object::Ptr root = new Poco::JSON::Object();
+                root->set("result", "ok");
+                std::ostream &ostr = response.send();
+                Poco::JSON::Stringifier::stringify(root, ostr);
+                return;
             }
             else if (form.has("id") && (request.getMethod() == Poco::Net::HTTPRequest::HTTP_GET))
             {
