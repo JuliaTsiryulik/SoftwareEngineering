@@ -128,7 +128,18 @@ public:
         HTMLForm form(request, request.stream());
         try
         {
-            if (form.has("id") && (request.getMethod() == Poco::Net::HTTPRequest::HTTP_GET))
+            if (hasSubstr(request.getURI(), "/ping"))
+            {
+                response.setStatus(Poco::Net::HTTPResponse::HTTP_OK);
+		response.setChunkedTransferEncoding(true);
+		response.setContentType("application/json");
+		Poco::JSON::Object::Ptr root = new Poco::JSON::Object();
+		root->set("ping", "ok");
+		std::ostream &ostr = response.send();
+		Poco::JSON::Stringifier::stringify(root, ostr);
+		return;
+            }
+            else if (form.has("id") && (request.getMethod() == Poco::Net::HTTPRequest::HTTP_GET))
             {
                 if(TryAuth(request, response) == 0){
                     //No Auth
