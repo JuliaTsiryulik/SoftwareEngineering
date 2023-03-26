@@ -21,7 +21,7 @@
 
 ***UPD***
 
-Для запуска микросервисов в Docker, неоходимо перейти в папаку [!Docker](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/!Docker) и выполнить команду в консоли 
+Для запуска микросервисов в Docker, неоходимо перейти в папку [!Docker](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/!Docker) и выполнить команду в консоли:
 ```
 docker-compose up --build
 ```
