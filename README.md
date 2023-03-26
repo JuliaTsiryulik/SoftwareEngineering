@@ -21,7 +21,7 @@
 
 ***UPD***
 
-Для запуска микросервисов в Docker, неоходимо перейти в папку [!Docker](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/!Docker) и выполнить команду в консоли:
+Для запуска микросервисов в Docker, неоходимо перейти в папку [Messenger/!Docker](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/!Docker) и выполнить команду в консоли:
 ```
 docker-compose up --build
 ```
@@ -29,6 +29,6 @@ docker-compose up --build
 
 Все таблицы базы данных для работы сервисов будут созданы при первом запуске сервисов.
 
-* Сервис авторизации: [UserService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/UserService)
-* Сервис групповых чатов: [GroupService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/GroupService)
-* Сервис P2P чатов: [P2PService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/P2PService)
+* Сервис авторизации: [Messenger/UserService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/UserService)
+* Сервис групповых чатов: [Messenger/GroupService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/GroupService)
+* Сервис P2P чатов: [Messenger/P2PService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/P2PService)
