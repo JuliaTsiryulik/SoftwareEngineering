@@ -29,6 +29,6 @@ docker-compose up --build
 
 Все таблицы базы данных для работы сервисов будут созданы при первом запуске сервисов.
 
-*Сервис авторизации: [UserService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/UserService)
-*Сервис групповых чатов: [GroupService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/GroupService)
-*Сервис P2P чатов: [P2PService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/P2PService)
+* Сервис авторизации: [UserService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/UserService)
+* Сервис групповых чатов: [GroupService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/GroupService)
+* Сервис P2P чатов: [P2PService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/P2PService)
