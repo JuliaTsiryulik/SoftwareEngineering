@@ -25,6 +25,6 @@
 ```
 docker-compose up --build
 ```
-Тестовые данные для загрузки в базу данных находятся в [commands.sql]().
+Тестовые данные для загрузки в базу данных находятся в [commands.sql](https://github.com/JuliaTsiryulik/SoftwareEngineering/blob/main/Messenger/commands.sql).
 
 Все таблицы базы данных для работы сервисов будут созданы при первом запуске сервисов.
