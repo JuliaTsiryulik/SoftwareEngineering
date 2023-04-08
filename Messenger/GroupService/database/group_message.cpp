@@ -33,10 +33,7 @@ namespace database
                         << "PRIMARY KEY (`id`),"
                         << "CONSTRAINT `fk_group_id`"
                         << "FOREIGN KEY (`group_id`)"
-                        << "REFERENCES `Group` (`id`),"
-                        << "CONSTRAINT `fk_group_sender_user`"
-                        << "FOREIGN KEY (`sender_id`)"
-                        << "REFERENCES `User` (`id`));",
+                        << "REFERENCES `Group` (`id`));",
                 now;
 
             Statement create_stmt_grp_msg_read(session);
@@ -46,9 +43,6 @@ namespace database
                         << "`group_id` INT NOT NULL,"
                         << "`message_id` INT NOT NULL,"
                         << "PRIMARY KEY (`id`),"
-                        << "CONSTRAINT `fk_userRead_id`"
-                        << "FOREIGN KEY (`user_id`)"
-                        << "REFERENCES `User` (`id`),"
                         << "CONSTRAINT `fk_groupRead_id`"
                         << "FOREIGN KEY (`group_id`)"
                         << "REFERENCES `Group` (`id`),"

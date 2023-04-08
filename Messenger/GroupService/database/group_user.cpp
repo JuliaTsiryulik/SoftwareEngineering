@@ -33,10 +33,7 @@ namespace database
                         << "PRIMARY KEY (`id`),"
                         << "CONSTRAINT `fk_groupUser_id`"
                         << "FOREIGN KEY (`group_id`)"
-                        << "REFERENCES `Group` (`id`),"
-                        << "CONSTRAINT `fk_user_id`"
-                        << "FOREIGN KEY (`user_id`)"
-                        << "REFERENCES `User` (`id`));",
+                        << "REFERENCES `Group` (`id`));",
                 now;
         }
         catch (Poco::Data::MySQL::ConnectionException &e)

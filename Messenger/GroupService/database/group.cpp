@@ -32,10 +32,7 @@ namespace database
                         << "`author_id` INT NOT NULL,"
                         << "`create_date` DATETIME NOT NULL,"
                         << "`able_write` BOOLEAN NULL,"
-                        << "PRIMARY KEY (`id`),"
-                        << "CONSTRAINT `fk_author_user`"
-                        << "FOREIGN KEY (`author_id`)"
-                        << "REFERENCES `User` (`id`));",
+                        << "PRIMARY KEY (`id`));",
                 now;
         }
         catch (Poco::Data::MySQL::ConnectionException &e)
