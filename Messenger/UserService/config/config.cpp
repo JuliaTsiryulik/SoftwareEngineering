@@ -2,22 +2,22 @@
 
 Config::Config()
 {
-        /*_host = std::getenv("DB_HOST");
+        _host = std::getenv("DB_HOST");
         _port = std::getenv("DB_PORT");
         _login = std::getenv("DB_LOGIN");
         _password = std::getenv("DB_PASSWORD");
-        _database = std::getenv("DB_DATABASE");*/
+        _database = std::getenv("DB_DATABASE");
 
 
-        _host = "localhost";
-        _port = "3306";
+        //_host = "localhost";
+       // _port = "3306";
         //_login = "msguser";
         //_password = "msguser";
         //_database = "msgdb";
 
-        _login = "test";
-        _password = "test";
-        _database = "test_db";
+        //_login = "test";
+        //_password = "test";
+        //_database = "test_db";
         
 
 }
