@@ -21,13 +21,13 @@
 
 ***UPD***
 
+Пользователи теперь хранятся в двух базах данных. Все остальные таблицы хранятся в первой базе данных. 
+
 Для запуска микросервисов в Docker, неоходимо перейти в папку [Messenger/!Docker](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/!Docker) и выполнить команду в консоли:
 ```
 docker-compose up --build
 ```
-Тестовые данные для загрузки в базу данных находятся в [commands.sql](https://github.com/JuliaTsiryulik/SoftwareEngineering/blob/main/Messenger/commands.sql).
-
-Пользователи теперь хранятся в двух базах данных. Все остальные таблицы хранятся в первой базе данных. 
+Тестовые данные для загрузки в базу данных находятся в [commands.sql](https://github.com/JuliaTsiryulik/SoftwareEngineering/blob/main/Messenger/commands.sql). 
 
 Для загрузки тестовых данных в базу данных необходимо подключаться к ProxySQL. 
 
