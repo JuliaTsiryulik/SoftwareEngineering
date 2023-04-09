@@ -27,6 +27,8 @@ docker-compose up --build
 ```
 Тестовые данные для загрузки в базу данных находятся в [commands.sql](https://github.com/JuliaTsiryulik/SoftwareEngineering/blob/main/Messenger/commands.sql).
 
+Пользователи теперь хранятся в двух базах данных. Все остальные таблицы хранятся в первой базе данных. 
+
 Для загрузки тестовых данных в базу данных необходимо подключаться к ProxySQL. 
 
 Параметры:
