@@ -27,8 +27,15 @@ docker-compose up --build
 ```
 Тестовые данные для загрузки в базу данных находятся в [commands.sql](https://github.com/JuliaTsiryulik/SoftwareEngineering/blob/main/Messenger/commands.sql).
 
+Для загрузки тестовых данных в базу данных необходимо подключаться к ProxySQL. 
+
+Параметры:
+- DB_HOST=localhost
+- DB_PORT=6033
+
 Все таблицы базы данных для работы сервисов будут созданы при первом запуске сервисов.
 
 * Сервис авторизации: [Messenger/UserService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/UserService)
 * Сервис групповых чатов: [Messenger/GroupService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/GroupService)
 * Сервис P2P чатов: [Messenger/P2PService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/P2PService)
+

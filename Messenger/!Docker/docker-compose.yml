@@ -65,7 +65,7 @@ services:
     healthcheck:
       test: "/usr/bin/mysql --user=msguser --password=msguser --execute \"SHOW DATABASES;\""
       timeout: 20s
-      retries: 5
+      retries: 10
     networks:
       - msg-network
     ports:
@@ -95,7 +95,8 @@ services:
     networks:
       - msg-network
     depends_on:
-      - proxysql
+      proxysql:
+        condition: service_started
 
   group_service:
     build:

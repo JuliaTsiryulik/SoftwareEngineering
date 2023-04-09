@@ -8,105 +8,103 @@ DELETE FROM `Group`;
 
 DELETE FROM P2P;
 
-DELETE FROM `User`;
+DELETE FROM `User` -- sharding:0
+;
 
-
-INSERT INTO `User`
-(login, password, first_name, last_name, email)
-VALUES('Jul', 'Jullet111', 'Julia', 'Lebedeva', 'myaddress@gmail.com');
-
-INSERT INTO `User`
-(login, password, first_name, last_name, email)
-VALUES('vovan', 'pwd', 'Vladimir', 'Pupkin', 'doshik@gmail.com');
+DELETE FROM `User` -- sharding:1
+;
 
 INSERT INTO `User`
-(login, password, first_name, last_name, email)
-VALUES('flower', 'floddd', 'Rose', 'Ivanova', 'flower@mail.ru');
+(id, login, password, first_name, last_name, email)
+VALUES(1, 'Jul', 'Jullet111', 'Julia', 'Lebedeva', 'myaddress@gmail.com') -- sharding:0
+;
 
 INSERT INTO `User`
-(login, password, first_name, last_name, email)
-VALUES('yellowPen', 'error12', 'Andrei', 'Lagoda', 'arrryub@mail.ru');
+(id, login, password, first_name, last_name, email)
+VALUES(2, 'vovan', 'pwd', 'Vladimir', 'Pupkin', 'doshik@gmail.com') -- sharding:1
+;
 
 INSERT INTO `User`
-(login, password, first_name, last_name, email)
-VALUES('killMe', 'dead', 'Alla', 'Reznik', 'meow@gmail.com');
+(id, login, password, first_name, last_name, email)
+VALUES(3, 'flower', 'floddd', 'Rose', 'Ivanova', 'flower@mail.ru') -- sharding:0
+;
+
+INSERT INTO `User`
+(id, login, password, first_name, last_name, email)
+VALUES(4, 'yellowPen', 'error12', 'Andrei', 'Lagoda', 'arrryub@mail.ru') -- sharding:1
+;
+
+INSERT INTO `User`
+(id, login, password, first_name, last_name, email)
+VALUES(5, 'killMe', 'dead', 'Alla', 'Reznik', 'meow@gmail.com') -- sharding:1
+;
 
 INSERT INTO P2P
 (sender_id, receiver_id, `text`, create_date, is_read)
-VALUES((select id from `User` where login = 'Jul'), 
-	   (select id from `User` where login = 'vovan'), 'Hello! How are you?', NOW(), 0);
+VALUES(1, 2, 'Hello! How are you?', NOW(), 0);
 	  
 INSERT INTO P2P
 (sender_id, receiver_id, `text`, create_date, is_read)
-VALUES((select id from `User` where login = 'killMe'), 
-	   (select id from `User` where login = 'flower'), 'I want to sleep...', NOW(), 0);
+VALUES(5, 3, 'I want to sleep...', NOW(), 0);
 	  
 INSERT INTO P2P
 (sender_id, receiver_id, `text`, create_date, is_read)
-VALUES((select id from `User` where login = 'flower'), 
-	   (select id from `User` where login = 'yellowPen'), 'I hate Linux', NOW(), 1);
+VALUES(3, 4, 'I hate Linux', NOW(), 1);
 	  
 INSERT INTO P2P
 (sender_id, receiver_id, `text`, create_date, is_read)
-VALUES((select id from `User` where login = 'yellowPen'), 
-	   (select id from `User` where login = 'flower'), 'Why?', NOW(), 1);
+VALUES(4, 3, 'Why?', NOW(), 1);
 	  
 INSERT INTO P2P
 (sender_id, receiver_id, `text`, create_date, is_read)
-VALUES((select id from `User` where login = 'flower'), 
-	   (select id from `User` where login = 'yellowPen'), 
-	    'Because Linux is not friendly to user', NOW(), 0);
+VALUES(3, 4, 'Because Linux is not friendly to user', NOW(), 0);
 	   
 
 	   
 INSERT INTO `Group`
 (name, author_id, create_date, able_write)
-VALUES('ChipsLovers', 
-       (select id from `User` where login = 'Jul'), NOW(), TRUE);
+VALUES('ChipsLovers', 1, NOW(), TRUE);
       
 INSERT INTO `Group`
 (name, author_id, create_date, able_write)
-VALUES('kengaROO', 
-       (select id from `User` where login = 'killMe'), NOW(), TRUE);
+VALUES('kengaROO', 5, NOW(), TRUE);
   
       
 INSERT INTO GroupUser
 (group_id, user_id, is_moder, is_admin)
 VALUES((select id from `Group` where name = 'ChipsLovers'), 
-       (select id from `User` where login = 'vovan'), TRUE, 0);
+       2, TRUE, 0);
       
 INSERT INTO GroupUser
 (group_id, user_id, is_moder, is_admin)
 VALUES((select id from `Group` where name = 'ChipsLovers'), 
-       (select id from `User` where login = 'flower'), 0, 0);
+       3, 0, 0);
       
 INSERT INTO GroupUser
 (group_id, user_id, is_moder, is_admin)
 VALUES((select id from `Group` where name = 'ChipsLovers'), 
-       (select id from `User` where login = 'yellowPen'), 0, 0);
+       4, 0, 0);
             
 INSERT INTO GroupUser
 (group_id, user_id, is_moder, is_admin)
 VALUES((select id from `Group` where name = 'kengaROO'), 
-       (select id from `User` where login = 'flower'), 0, 0);
+       3, 0, 0);
       
 INSERT INTO GroupUser
 (group_id, user_id, is_moder, is_admin)
 VALUES((select id from `Group` where name = 'kengaROO'), 
-       (select id from `User` where login = 'yellowPen'), 0, 0); 
+       4, 0, 0); 
       
 
 INSERT INTO GroupMessage
 (group_id, sender_id, `text`, create_date)
 VALUES((select id from `Group` where name = 'ChipsLovers'), 
-       (select id from `User` where login = 'Jul'), 
-       'I LOVE chip and LOVE sleeping, but as you can see, I have already eaten chips...', NOW());
+       1, 'I LOVE chip and LOVE sleeping, but as you can see, I have already eaten chips...', NOW());
  
 INSERT INTO GroupMessage
 (group_id, sender_id, `text`, create_date)
 VALUES((select id from `Group` where name = 'ChipsLovers'), 
-       (select id from `User` where login = 'vovan'), 
-       'Then eat more chips', NOW()); 
+       2, 'Then eat more chips', NOW()); 
       
 INSERT INTO GroupMessage
 (group_id, sender_id, `text`, create_date)
@@ -117,23 +115,19 @@ VALUES((select id from `Group` where name = 'ChipsLovers'),
 INSERT INTO GroupMessage
 (group_id, sender_id, `text`, create_date)
 VALUES((select id from `Group` where name = 'ChipsLovers'), 
-       (select id from `User` where login = 'flower'), 
-       'So sad', NOW()); 
+       3, 'So sad', NOW()); 
       
 INSERT INTO GroupMessage
 (group_id, sender_id, `text`, create_date)
 VALUES((select id from `Group` where name = 'kengaROO'), 
-       (select id from `User` where login = 'yellowPen'), 
-       'Hi everyone! What is the name of this animal?', NOW()); 
+       4, 'Hi everyone! What is the name of this animal?', NOW()); 
       
 INSERT INTO GroupMessage
 (group_id, sender_id, `text`, create_date)
 VALUES((select id from `Group` where name = 'kengaROO'), 
-       (select id from `User` where login = 'killMe'), 
-       'kangaroo', NOW()); 
+       5, 'kangaroo', NOW()); 
 
 INSERT INTO GroupMessage
 (group_id, sender_id, `text`, create_date)
 VALUES((select id from `Group` where name = 'kengaROO'), 
-       (select id from `User` where login = 'yellowPen'), 
-       'Really? Did you know that in the indian languagee kangaroo means...?', NOW()); 
+       4, 'Really? Did you know that in the indian languagee kangaroo means...?', NOW()); 
