@@ -84,6 +84,7 @@ services:
       context: UserService
       dockerfile: Dockerfile
     container_name: user_service
+    restart: unless-stopped
     environment:
       - DB_HOST=proxysql
       - DB_PORT=6033
