@@ -104,6 +104,7 @@ services:
       context: GroupService
       dockerfile: Dockerfile
     container_name: group_service
+    restart: unless-stopped
     environment:
       - SERVICE_HOST=user_service
       - DB_HOST=proxysql
@@ -124,6 +125,7 @@ services:
       context: P2PService
       dockerfile: Dockerfile
     container_name: p2p_service
+    restart: unless-stopped
     environment:
       - SERVICE_HOST=user_service
       - DB_HOST=proxysql
