@@ -79,6 +79,17 @@ services:
       msgdb-node-2:
         condition: service_healthy
 
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning 
+    networks:
+      - msg-network
+    volumes: 
+      - cache:/data
+
   user_service:
     build:
       context: UserService
@@ -91,11 +102,14 @@ services:
       - DB_LOGIN=msguser
       - DB_PASSWORD=msguser
       - DB_DATABASE=msgdb
+      - CACHE=cache:6379
     ports:
       - 8080:8080
     networks:
       - msg-network
     depends_on:
+      cache:
+        condition: service_started      
       proxysql:
         condition: service_started
 
@@ -112,6 +126,7 @@ services:
       - DB_LOGIN=msguser
       - DB_PASSWORD=msguser
       - DB_DATABASE=msgdb
+      - CACHE=cache:6379
     ports:
       - 8081:8081
     networks:
@@ -133,6 +148,7 @@ services:
       - DB_LOGIN=msguser
       - DB_PASSWORD=msguser
       - DB_DATABASE=msgdb
+      - CACHE=cache:6379
     ports:
       - 8082:8082
     networks:
@@ -145,6 +161,7 @@ volumes:
   msgdb-n1-data:
   msgdb-n2-data:
   proxysql-data:
+  cache:
 
 networks:
   msg-network:

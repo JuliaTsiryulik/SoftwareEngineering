@@ -3,6 +3,10 @@ cmake_minimum_required(VERSION 3.2)
 project(hl_server C CXX)
 
 SET (EXAMPLE_BINARY "UserService")
+set (STD_CXX "c++17")
+set (REDISCPP_FLAGS "-DREDISCPP_HEADER_ONLY=ON")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -std=${STD_CXX} ${REDISCPP_FLAGS}")
+set (CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -std=${STD_CXX} -Wall -DNDEBUG ${REDISCPP_FLAGS}")
 
 find_package(OpenSSL)
 find_package(Threads)
@@ -23,7 +27,8 @@ SET(CMAKE_CXX_STANDARD 17)
 SET(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(${EXAMPLE_BINARY} main.cpp 
-                                 config/config.cpp 
+                                 config/config.cpp
+                                 database/cache.cpp
                                  database/database.cpp
                                  database/user.cpp)
 
