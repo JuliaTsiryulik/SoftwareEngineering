@@ -41,9 +41,9 @@ int main()
 
             database::User u;
 
-            u.first_name() = object->getValue<std::string>("first_name");
-            u.last_name() = object->getValue<std::string>("last_name");
-            u.email() = object->getValue<std::string>("email");
+            u.first_name() = object->getValue<std::string>("FirstName");
+            u.last_name() = object->getValue<std::string>("LastName");
+            u.email() = object->getValue<std::string>("Email");
             u.login() = u.email();
             u.password() ="pwd123";
 
