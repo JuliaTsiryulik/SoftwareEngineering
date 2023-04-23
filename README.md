@@ -41,3 +41,6 @@ docker-compose up --build
 * Сервис групповых чатов: [Messenger/GroupService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/GroupService)
 * Сервис P2P чатов: [Messenger/P2PService](https://github.com/JuliaTsiryulik/SoftwareEngineering/tree/main/Messenger/P2PService)
 
+Реализовано кеширование с помощью *Redis* с шаблонами "сквозное чтение" и "сквозная запись" для получения информации о пользователе.
+
+Результаты тестирования сравнения времени отклика и пропускной способности сервиса по запросу данных пользователя с помощью утилиты *wrk* с использованием кеша и без него сохранены в файле [performance.md](https://github.com/JuliaTsiryulik/SoftwareEngineering/blob/cache/performance.md)
