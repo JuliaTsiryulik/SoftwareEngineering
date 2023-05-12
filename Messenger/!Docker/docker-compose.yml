@@ -90,6 +90,42 @@ services:
     volumes: 
       - cache:/data
 
+  kafka1:
+    image: 'bitnami/kafka:latest'
+    container_name: kafka1
+    restart: unless-stopped
+    # ports:
+    #   - "2181:2181"
+    #   - "9092:9092"
+    #   - "9093:9093"
+    environment:
+        KAFKA_ENABLE_KRAFT: "yes"
+        KAFKA_CFG_PROCESS_ROLES: "broker,controller"
+        KAFKA_CFG_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
+        KAFKA_CFG_LISTENERS: "PLAINTEXT://:9092,CONTROLLER://:9093"
+        KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT"
+        KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://kafka1:9092"
+        KAFKA_BROKER_ID: 1
+        KAFKA_CFG_NODE_ID: 1
+        KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: "1@kafka1:9093"
+        ALLOW_PLAINTEXT_LISTENER: "yes"
+        KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+        KAFKA_KRAFT_CLUSTER_ID: "dh6khitPSDGZSBOjNeTC_g"
+    volumes:
+        - kafka_volume1:/bitnami/kafka
+    networks:
+        - msg-network
+        
+  kafka-ui:
+    image: provectuslabs/kafka-ui:v0.4.0
+    ports:
+      - "8888:8080"
+    environment:
+      KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS: "kafka1:9092"
+      KAFKA_CLUSTERS_0_NAME: "kraft"
+    networks:
+      - msg-network
+
   user_service:
     build:
       context: UserService
@@ -103,6 +139,9 @@ services:
       - DB_PASSWORD=msguser
       - DB_DATABASE=msgdb
       - CACHE=cache:6379
+      - QUEUE_HOST=kafka1:9092
+      - QUEUE_TOPIC=event_server
+      - QUEUE_GROUP_ID=0
     ports:
       - 8080:8080
     networks:
@@ -111,6 +150,34 @@ services:
       cache:
         condition: service_started      
       proxysql:
+        condition: service_started
+      kafka1:
+        condition: service_started
+      msgdb_writer:
+        condition: service_started
+        
+  msgdb_writer:
+    build:
+      context: msgdb_writer
+      dockerfile: Dockerfile
+    container_name: msgdb_writer
+    restart: unless-stopped
+    environment:
+      - DB_HOST=proxysql
+      - DB_PORT=6033
+      - DB_LOGIN=msguser
+      - DB_PASSWORD=msguser
+      - DB_DATABASE=msgdb
+      - CACHE=cache:6379
+      - QUEUE_HOST=kafka1:9092
+      - QUEUE_TOPIC=event_server
+      - QUEUE_GROUP_ID=0
+    networks:
+      - msg-network
+    depends_on:   
+      proxysql:
+        condition: service_started
+      kafka1:
         condition: service_started
 
   group_service:
@@ -162,6 +229,7 @@ volumes:
   msgdb-n2-data:
   proxysql-data:
   cache:
+  kafka_volume1:
 
 networks:
   msg-network:
