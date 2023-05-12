@@ -366,6 +366,8 @@ namespace database
     #include <mutex>
     void User::send_to_queue()
     {
+        _id = -1;
+
         static cppkafka::Configuration config ={
             {"metadata.broker.list", Config::get().get_queue_host()},
             {"acks","all"}};
