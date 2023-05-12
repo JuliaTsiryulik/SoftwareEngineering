@@ -119,7 +119,7 @@ services:
   kafka-ui:
     image: provectuslabs/kafka-ui:v0.4.0
     ports:
-      - "8888:8080"
+      - "8888:8181"
     environment:
       KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS: "kafka1:9092"
       KAFKA_CLUSTERS_0_NAME: "kraft"
