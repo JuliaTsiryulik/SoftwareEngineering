@@ -10,4 +10,4 @@ ARG build5=$RANDOM
 RUN git clone --branch cache https://github.com/JuliaTsiryulik/SoftwareEngineering.git
 RUN sudo ldconfig
 RUN cd SoftwareEngineering/Messenger/msgdb_writer && mkdir build && cd build && cmake  .. && make
-ENTRYPOINT [ "SoftwareEngineering/Messenger/UserService/build/msgdb_writer" ]
+ENTRYPOINT [ "SoftwareEngineering/Messenger/msgdb_writer/build/msgdb_writer" ]
